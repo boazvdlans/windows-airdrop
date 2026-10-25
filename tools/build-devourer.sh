@@ -27,7 +27,7 @@ if [ ! -f "$DEPS/libusb/MinGW64/static/libusb-1.0.a" ]; then
 		gpg --batch --import KEYS 2>/dev/null &&
 		gpg --batch --status-fd 1 --verify "libusb-${LIBUSB_TAG#v}.7z.asc" "libusb-${LIBUSB_TAG#v}.7z" 2>/dev/null |
 			grep -q "VALIDSIG .* $LIBUSB_FPR" || { echo "libusb signature check FAILED" >&2; exit 1; })
-	(cd "$DEPS/libusb" && 7z x -y "../libusb-dl/libusb-${LIBUSB_TAG#v}.7z" > /dev/null)
+	(cd "$DEPS/libusb" && 7z x -y "../libusb-dl/libusb-${LIBUSB_TAG#v}.7z" "MinGW64/*" "include/*" > /dev/null)
 fi
 
 # devourer includes both <libusb.h> and <libusb-1.0/libusb.h>; pkgconf wants <prefix>/lib/pkgconfig.
